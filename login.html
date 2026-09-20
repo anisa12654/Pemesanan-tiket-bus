@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <title>Login - Tiket Bus</title>
+  <style>
+    body { font-family: Arial; background:#eef2f7; display:flex; height:100vh; justify-content:center; align-items:center; }
+    .card { background:#fff; padding:20px; border-radius:8px; width:300px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+    input { width:100%; padding:10px; margin:8px 0; border:1px solid #ccc; border-radius:5px; }
+    button { width:100%; padding:10px; border:none; border-radius:5px; background:#28a745; color:#fff; font-weight:bold; cursor:pointer; }
+    a { font-size:0.9em; display:block; margin-top:10px; text-align:center; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button onclick="login()">Masuk</button>
+    <a href="register.html">Belum punya akun? Daftar</a>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+
+      const user = users.find(u => u.username === username && u.password === password);
+
+      if (user) {
+        alert("Login berhasil!");
+        localStorage.setItem("loggedInUser", username);
+        window.location.href = "dashboard.html";
+      } else {
+        alert("Username atau password salah!");
+      }
+    }
+  </script>
+</body>
+</html>
